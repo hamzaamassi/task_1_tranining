@@ -1,28 +1,28 @@
 // ignore_for_file: prefer_typing_uninitialized_variables
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:task_1/home/controllers/home_controller.dart';
 import 'package:task_1/product/products_category.dart';
+import 'package:task_1/product/ps5_product.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({
     Key? key,
-    this.initialIndex = 0,
   }) : super(key: key);
-  final int initialIndex;
 
   @override
   State<HomePage> createState() => _HomePageState();
 }
 
 class _HomePageState extends State<HomePage> {
+  final HomeController controller = Get.find();
   final PageController _pageController = PageController();
-
-  var _currentIndex;
 
   @override
   void initState() {
     super.initState();
-    _currentIndex = widget.initialIndex;
+    controller.initialIndex.value;
   }
 
   @override
@@ -32,7 +32,7 @@ class _HomePageState extends State<HomePage> {
       initialIndex: 0,
       child: Scaffold(
         backgroundColor: const Color(0XFF333742),
-        appBar: _currentIndex == 0
+        appBar: controller.initialIndex.value == 0
             ? AppBar(
                 title: const Text(
                   'Categories',
@@ -79,22 +79,45 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
             ),
+            const SizedBox(
+              height: 32,
+            ),
             Expanded(
               child: PageView(
                 physics: const BouncingScrollPhysics(),
                 controller: _pageController,
                 onPageChanged: (index) {
                   setState(() {
-                    _currentIndex = index;
+                    controller.initialIndex.value = index;
                   });
                 },
-                children: [
-                  const ProductsCategory(),
-                  Container(),
-                  Container(),
-                  Container(),
-                  Container(),
-                  Container(),
+                children: const [
+                  ProductsCategory(),
+                  GridProductPage(),
+                  Center(
+                    child: Text(
+                      "PS4",
+                      style: TextStyle(fontSize: 50),
+                    ),
+                  ),
+                  Center(
+                    child: Text(
+                      "Xbox 1",
+                      style: TextStyle(fontSize: 50),
+                    ),
+                  ),
+                  Center(
+                    child: Text(
+                      "Xbox 2",
+                      style: TextStyle(fontSize: 50),
+                    ),
+                  ),
+                  Center(
+                    child: Text(
+                      "Xbox 3",
+                      style: TextStyle(fontSize: 50),
+                    ),
+                  ),
                 ],
               ),
             ),
