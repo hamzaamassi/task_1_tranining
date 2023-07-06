@@ -14,11 +14,16 @@ class ProductsCategory extends StatefulWidget {
 
 class _ProductPageState extends State<ProductsCategory> {
   List<Product> productList = [
-    Product('assets/images/product.png', 'Playstation 5', 'Sony', 890, 900,4),
-    Product('assets/images/product.png', 'Playstation 5', 'Sony', 890, 900,4),
-    Product('assets/images/product.png', 'Playstation 5', 'Sony', 890, 900,4),
-    Product('assets/images/product.png', 'Playstation 5', 'Sony', 890, 900,4),
-    Product('assets/images/product.png', 'Playstation 5', 'Sony', 890, 900,4),
+    Product('assets/images/product.png', 'Playstation 5', 'Sony', " 890", "900",
+        "4", true),
+    Product('assets/images/product.png', 'Playstation 5', 'Sony', " 890", "900",
+        "4", false),
+    Product('assets/images/product.png', 'Playstation 5', 'Sony', " 890", "900",
+        "4", false),
+    Product('assets/images/product.png', 'Playstation 5', 'Sony', " 890", "900",
+        "4", true),
+    Product('assets/images/product.png', 'Playstation 5', 'Sony', " 890", "900",
+        "4", true),
   ];
 
   @override
@@ -54,7 +59,10 @@ class _ProductPageState extends State<ProductsCategory> {
                   ),
                 ),
                 GestureDetector(
-                    onTap: () {Get.snackbar("Filter", "Open Filter");},
+                    onTap: () => {
+                          Get.snackbar("Filter", "Open Filter"),
+                          Get.toNamed(Routes.details)
+                        },
                     child: Container(
                       width: 50,
                       height: 50,
@@ -90,6 +98,7 @@ class _ProductPageState extends State<ProductsCategory> {
 
   Widget _buildListItem(BuildContext context, int index) {
     Product product = productList[index];
+    bool? isFavorite = productList[index].favorite;
     return Column(
       children: [
         Container(
@@ -109,14 +118,34 @@ class _ProductPageState extends State<ProductsCategory> {
                       style: TextStyle(color: Colors.white.withOpacity(.7)),
                     ),
                     const SizedBox(width: 220),
-                    GestureDetector(
-                        onTap: () => Get.toNamed(Routes.info),
-                        child: SvgPicture.asset(
-                          'assets/icons/fav.svg',
-                          width: 20,
-                          height: 17,
-                          color: Colors.white.withOpacity(.7),
-                        ))
+                    isFavorite!
+                        ? GestureDetector(
+                            onTap: () => {
+                              Get.snackbar("Removed", "Removed from favorites"),
+                              setState(() {
+                                productList[index].favorite = false;
+                              })
+                            },
+                            child: SvgPicture.asset(
+                              'assets/icons/full_fav_white.svg',
+                              width: 20,
+                              height: 17,
+                              color: Colors.white,
+                            ),
+                          )
+                        : GestureDetector(
+                            onTap: () => {
+                              Get.snackbar("Success", "Added to favorites"),
+                              setState(() {
+                                productList[index].favorite = true;
+                              })
+                            },
+                            child: SvgPicture.asset(
+                              'assets/icons/fav.svg',
+                              width: 20,
+                              height: 17,
+                            ),
+                          ),
                   ],
                 ),
                 const SizedBox(height: 5),

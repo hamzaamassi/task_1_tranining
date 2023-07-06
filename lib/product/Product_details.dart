@@ -3,8 +3,15 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:task_1/routes/app_pages.dart';
 
-class ProductDetails extends StatelessWidget {
-  const ProductDetails({Key? key}) : super(key: key);
+class ProductDetails extends StatefulWidget {
+  const ProductDetails({super.key});
+
+  @override
+  State<ProductDetails> createState() => _ProductDetailsState();
+}
+
+class _ProductDetailsState extends State<ProductDetails> {
+  bool isFavorite = false;
 
   @override
   Widget build(BuildContext context) {
@@ -89,7 +96,7 @@ class ProductDetails extends StatelessWidget {
                                       fontWeight: FontWeight.bold)),
                               const SizedBox(height: 27),
                               GestureDetector(
-                                onTap: () => {},
+                                onTap: () => Get.toNamed(Routes.favorite),
                                 child: SvgPicture.asset(
                                   'assets/icons/full_cart.svg',
                                   width: 10,
@@ -122,7 +129,8 @@ class ProductDetails extends StatelessWidget {
                                     fontWeight: FontWeight.bold),
                               ),
                               GestureDetector(
-                                  onTap: () => {Get.snackbar("Star", "Star Rate")},
+                                  onTap: () =>
+                                      Get.snackbar("Star", "Star Rate"),
                                   child: SvgPicture.asset(
                                     'assets/icons/star.svg',
                                     width: 20,
@@ -269,7 +277,7 @@ class ProductDetails extends StatelessWidget {
                 ),
                 const SizedBox(height: 32),
                 GestureDetector(
-                  onTap: () => {Get.snackbar("Page", "Page view")},
+                  onTap: () => Get.snackbar("Page", "Page view"),
                   child: SvgPicture.asset(
                     'assets/icons/page.svg',
                     width: 8,
@@ -293,32 +301,37 @@ class ProductDetails extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  GestureDetector(
-                    onTap: () {
-                      Get.toNamed(Routes.details);
-                      Get.snackbar("Add To fav", "Button Clicked");
-                    },
-                    child: Container(
-                      height: 50,
-                      width: 55,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(16),
-                          color: const Color(0XFF454D5A)),
-                      child: Padding(
-                        padding: const EdgeInsets.all(15.0),
-                        child: SvgPicture.asset(
-                          'assets/icons/fav.svg',
-                          width: 26,
-                          height: 21,
-                          color: Colors.white,
+                  isFavorite
+                      ? GestureDetector(
+                          onTap: () => {
+                            Get.snackbar("Removed", "Removed from favorites"),
+                            setState(() {
+                              isFavorite = !isFavorite;
+                            })
+                          },
+                          child: SvgPicture.asset(
+                            'assets/icons/full_fav_white.svg',
+                            width: 20,
+                            height: 17,
+                            color: Colors.white,
+                          ),
+                        )
+                      : GestureDetector(
+                          onTap: () => {
+                            Get.snackbar("Success", "Added to favorites"),
+                            setState(() {
+                              isFavorite = !isFavorite;
+                            })
+                          },
+                          child: SvgPicture.asset(
+                            'assets/icons/fav.svg',
+                            width: 20,
+                            height: 17,
+                          ),
                         ),
-                      ),
-                    ),
-                  ),
                   GestureDetector(
-                      onTap: () {
-                        Get.snackbar("Add To Cart", "Button Clicked");
-                      },
+                      onTap: () =>
+                          Get.snackbar("Add To Cart", "Button Clicked"),
                       child: Container(
                         height: 50,
                         width: 270,

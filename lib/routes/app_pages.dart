@@ -26,27 +26,25 @@ class AppPages {
       page: () => AppBottomBar(),
       binding: AppBottomBarBinding(),
     ),
-
     GetPage(
       name: _Paths.profile,
       page: () => const ProfilePage(),
     ),
-
     GetPage(
       name: _Paths.products,
       page: () => const ProductsCategory(),
     ),
-
     GetPage(
       name: _Paths.sales,
-    page: () => const CartItemPage(),
+      page: () => const CartItemPage(),
+    ),
+    GetPage(
+      name: _Paths.favorite,
+      page: () => const ProductFavored(),
     ),
     GetPage(
       name: _Paths.details,
-    page: () => const ProductFavored(),
-    ), GetPage(
-      name: _Paths.info,
-    page: () => const ProductDetails(),
+      page: () => const ProductDetails(),
     ),
   ];
 }

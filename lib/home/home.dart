@@ -50,13 +50,11 @@ class _HomePageState extends State<HomePage> {
               width: double.infinity,
               child: Center(
                 child: TabBar(
-                  onTap: (index) {
-                    _pageController.animateToPage(
-                      index,
-                      duration: const Duration(milliseconds: 300),
-                      curve: Curves.easeInOut,
-                    );
-                  },
+                  onTap: (index) => _pageController.animateToPage(
+                    index,
+                    duration: const Duration(milliseconds: 300),
+                    curve: Curves.easeInOut,
+                  ),
                   physics: const BouncingScrollPhysics(),
                   labelColor: Colors.white,
                   indicatorColor: Colors.white,

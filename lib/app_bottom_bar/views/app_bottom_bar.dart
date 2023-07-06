@@ -18,7 +18,9 @@ class AppBottomBar extends StatelessWidget {
     const CartItemPage(),
     const ProfilePage(),
   ];
+
   AppBottomBar({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Obx(
@@ -40,9 +42,11 @@ class AppBottomBar extends StatelessWidget {
           ),
           actions: [
             GestureDetector(
-                onTap: () {Get.snackbar("Notification", "Notification message");},
+                onTap: () =>
+                    Get.snackbar("Notification", "Notification message"),
                 child: Padding(
-                  padding: const EdgeInsets.symmetric(vertical:10,horizontal: 15),
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
                   child: SvgPicture.asset(
                     'assets/icons/notification.svg',
                     width: 24,
@@ -54,8 +58,9 @@ class AppBottomBar extends StatelessWidget {
         ),
         // key: controller.scaffoldState,
         body: _pages[controller.selectedIndex.value],
-        bottomNavigationBar:
-        controllerHome.initialIndex.value == 0 ? buildBottomNavigationBar(context) : null,
+        bottomNavigationBar: controllerHome.initialIndex.value == 0
+            ? buildBottomNavigationBar(context)
+            : null,
       ),
     );
   }

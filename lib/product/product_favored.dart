@@ -2,8 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
-class ProductFavored extends StatelessWidget {
+class ProductFavored extends StatefulWidget {
   const ProductFavored({super.key});
+
+  @override
+  State<ProductFavored> createState() => _ProductFavoredState();
+}
+
+class _ProductFavoredState extends State<ProductFavored> {
+  bool isFavorite = false;
 
   @override
   Widget build(BuildContext context) {
@@ -13,13 +20,34 @@ class ProductFavored extends StatelessWidget {
         actions: [
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 8),
-            child: GestureDetector(
-                child: SvgPicture.asset(
-              'assets/icons/fav.svg',
-              width: 20,
-              height: 17,
-              color: Colors.white.withOpacity(.7),
-            )),
+            child: isFavorite
+                ? GestureDetector(
+                    onTap: () => {
+                      Get.snackbar("Removed", "Removed from favorites"),
+                      setState(() {
+                        isFavorite = !isFavorite;
+                      })
+                    },
+                    child: SvgPicture.asset(
+                      'assets/icons/full_fav_white.svg',
+                      width: 20,
+                      height: 17,
+                      color: Colors.white,
+                    ),
+                  )
+                : GestureDetector(
+                    onTap: () => {
+                      Get.snackbar("Success", "Added to favorites"),
+                      setState(() {
+                        isFavorite = !isFavorite;
+                      })
+                    },
+                    child: SvgPicture.asset(
+                      'assets/icons/fav.svg',
+                      width: 20,
+                      height: 17,
+                    ),
+                  ),
           )
         ],
         title: const Text('PULSE 3D Wireless Headset ',
@@ -150,7 +178,7 @@ class ProductFavored extends StatelessWidget {
                 Image.asset("assets/images/head_phone.png"),
                 const SizedBox(height: 41),
                 GestureDetector(
-                  onTap: () => {Get.snackbar("Page", "Page view")},
+                  onTap: () => Get.snackbar("Page", "Page view"),
                   child: SvgPicture.asset(
                     'assets/icons/page.svg',
                     width: 8,

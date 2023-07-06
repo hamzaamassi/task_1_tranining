@@ -7,8 +7,8 @@ abstract class Routes {
   static const profile = _Paths.profile;
   static const products = _Paths.products;
   static const sales = _Paths.sales;
+  static const favorite = _Paths.favorite;
   static const details = _Paths.details;
-  static const info = _Paths.info;
   static const home = _Paths.home;
 }
 
@@ -20,6 +20,6 @@ abstract class _Paths {
   static const products = '/products';
   static const sales = '/sales';
   static const details = '/details';
-  static const info = '/info';
+  static const favorite = '/favorite';
   static const home = '/home';
 }

@@ -16,13 +16,17 @@ class GridProductPage extends StatefulWidget {
 
 class _GridProductPageState extends State<GridProductPage> {
   List<Product> productList = [
-    Product('assets/images/product.png', 'Playstation 5', 'Sony', 890, 900, 4),
-    Product('assets/images/product.png', 'Playstation 5', 'Sony', 890, 900, 4),
-    Product('assets/images/product.png', 'Playstation 5', 'Sony', 890, 900, 4),
-    Product('assets/images/product.png', 'Playstation 5', 'Sony', 890, 900, 4),
-    Product('assets/images/product.png', 'Playstation 5', 'Sony', 890, 900, 4),
+    Product('assets/images/product.png', 'Playstation 5', 'Sony', "890", "900",
+        " 4", true),
+    Product('assets/images/product.png', 'Playstation 5', 'Sony', "890", "900",
+        " 4", false),
+    Product('assets/images/product.png', 'Playstation 5', 'Sony', "890", "900",
+        " 4", false),
+    Product('assets/images/product.png', 'Playstation 5', 'Sony', "890", "900",
+        " 4", true),
+    Product('assets/images/product.png', 'Playstation 5', 'Sony', "890", "900",
+        " 4", true),
   ];
-  bool isFavorite = true;
 
   @override
   Widget build(BuildContext context) {
@@ -45,6 +49,7 @@ class _GridProductPageState extends State<GridProductPage> {
 
   Widget _buildListItem(BuildContext context, int index) {
     Product product = productList[index];
+    bool? isFavorite = productList[index].favorite;
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 6, vertical: 5),
       child: Container(
@@ -54,139 +59,123 @@ class _GridProductPageState extends State<GridProductPage> {
           borderRadius: BorderRadius.circular(25),
           color: const Color(0xff454D5A),
         ),
-        child: Stack(children: [
-          Positioned(
-              left: 0,
-              right: 0,
-              child: Container(
-                decoration: const BoxDecoration(
-                  borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(25),
-                      topRight: Radius.circular(25)),
-                  color: Color(0xff4B535F),
-                ),
-                height: 168,
-                width: 164,
+        child: Stack(
+          children: [
+            Positioned(
+                left: 0,
+                right: 0,
                 child: Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 9,vertical: 10),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Container(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 6, vertical: 3),
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                            color: const Color(0xff333742)),
-                        child: Row(
-                          children: [
-                            Text(
-                              "${product.starNum}  ",
-                              style: const TextStyle(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold),
-                            ),
-                            GestureDetector(
+                  decoration: const BoxDecoration(
+                    borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(25),
+                        topRight: Radius.circular(25)),
+                    color: Color(0xff4B535F),
+                  ),
+                  height: 168,
+                  width: 164,
+                  child: Container(
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 9, vertical: 10),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Container(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 6, vertical: 3),
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                              color: const Color(0xff333742)),
+                          child: Row(
+                            children: [
+                              Text(
+                                "${product.starNum}  ",
+                                style: const TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                              GestureDetector(
+                                  child: SvgPicture.asset(
+                                'assets/icons/star.svg',
+                                width: 20,
+                                height: 17,
+                                color: const Color(0XFFFDD14B),
+                              ))
+                            ],
+                          ),
+                        ),
+                        isFavorite!
+                            ? GestureDetector(
+                                onTap: () => {
+                                  Get.snackbar(
+                                      "Removed", "Removed from favorites"),
+                                  setState(() {
+                                    productList[index].favorite = false;
+                                  })
+                                },
                                 child: SvgPicture.asset(
-                                  'assets/icons/star.svg',
+                                  'assets/icons/full_fav_white.svg',
                                   width: 20,
                                   height: 17,
-                                  color: Color(0XFFFDD14B),
-                                ))
-                          ],
+                                  color: Colors.white,
+                                ),
+                              )
+                            : GestureDetector(
+                                onTap: () => {
+                                  Get.snackbar("Success", "Added to favorites"),
+                                  setState(() {
+                                    productList[index].favorite = true;
+                                  })
+                                },
+                                child: SvgPicture.asset(
+                                  'assets/icons/fav.svg',
+                                  width: 20,
+                                  height: 17,
+                                ),
+                              ),
+                      ],
+                    ),
+                  ),
+                )),
+            Positioned(
+                bottom: 7,
+                left: 10,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      product.title,
+                      style: const TextStyle(fontSize: 15, color: Colors.white),
+                    ),
+                    Row(
+                      children: [
+                        Text(
+                          "\$ ${product.cost}",
+                          style: const TextStyle(
+                              fontSize: 18, color: Colors.white),
                         ),
-                      ),
-                      isFavorite
-                          ? GestureDetector(
-                              onTap: () {
-                                Get.snackbar("Removed", "Removed from favorite");
-                                setState(() {
-                                  isFavorite = false;
-                                });
-                              },
-                              child: SvgPicture.asset(
-                                'assets/icons/full_fav_white.svg',
-                                width: 20,
-                                height: 17,
-                                color: Colors.white,
-                              ))
-                          : GestureDetector(
-                              onTap: () {
-                                Get.snackbar("Success", "Added to favorite");
-                                setState(() {
-                                  isFavorite = true;
-                                });
-                              },
-                              child: SvgPicture.asset(
-                                'assets/icons/fav.svg',
-                                width: 20,
-                                height: 17,
-                              ))
-                    ],
-                  ),
-                ),
-              )),
-          Positioned(
-              bottom: 7,
-              left: 10,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    product.title,
-                    style: const TextStyle(fontSize: 15, color: Colors.white),
-                  ),
-                  Row(
-                    children: [
-                      Text(
-                        "\$ ${product.cost}",
-                        style:
-                            const TextStyle(fontSize: 18, color: Colors.white),
-                      ),
-                      Text(
-                        "\$ ${product.realCost}",
-                        style: const TextStyle(
-                            fontSize: 10,
-                            decoration: TextDecoration.lineThrough,
-                            color: Colors.white),
-                      ),
-                    ],
-                  )
-                ],
-              )),
-          Positioned(
-            right: 9,
-            top: 146,
-            child: Container(
-              height: 40,
-              width: 40,
-              padding: EdgeInsets.all(12),
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
-                  color: const Color(0xff333742)),
-              child: GestureDetector(
-                  onTap: () {
-                    Get.snackbar("Success", "Added to cart item successfully");
-                  },
-                  child: SvgPicture.asset(
-                    'assets/icons/sale.svg',
-                    width: 15,
-                    height: 15,
-                    color: Colors.white,
-                  )),
-            ),
-          ),
-          Positioned(
-              top: 51,
-              bottom: 59,
-              right: 37,
-              child: Image.asset(
-                'assets/images/head_phone.png',
-                height: 140,
-                width: 140,
-              )),
-        ]),
+                        Text(
+                          "\$ ${product.realCost}",
+                          style: const TextStyle(
+                              fontSize: 10,
+                              decoration: TextDecoration.lineThrough,
+                              color: Colors.white),
+                        ),
+                      ],
+                    )
+                  ],
+                )),
+            Positioned(
+                top: 51,
+                bottom: 59,
+                right: 37,
+                child: Image.asset(
+                  'assets/images/head_phone.png',
+                  height: 140,
+                  width: 140,
+                )),
+          ],
+        ),
       ),
     );
   }
