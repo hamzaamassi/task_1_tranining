@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:scroll_snap_list/scroll_snap_list.dart';
-import 'package:task_1/models/produt.dart';
+import 'package:task_1/models/product.dart';
 import 'package:task_1/routes/app_pages.dart';
 
 class ProductsCategory extends StatefulWidget {
@@ -14,11 +14,11 @@ class ProductsCategory extends StatefulWidget {
 
 class _ProductPageState extends State<ProductsCategory> {
   List<Product> productList = [
-    Product('assets/images/product.png', 'Playstation 5', 'Sony', 890, 900),
-    Product('assets/images/product.png', 'Playstation 5', 'Sony', 890, 900),
-    Product('assets/images/product.png', 'Playstation 5', 'Sony', 890, 900),
-    Product('assets/images/product.png', 'Playstation 5', 'Sony', 890, 900),
-    Product('assets/images/product.png', 'Playstation 5', 'Sony', 890, 900),
+    Product('assets/images/product.png', 'Playstation 5', 'Sony', 890, 900,4),
+    Product('assets/images/product.png', 'Playstation 5', 'Sony', 890, 900,4),
+    Product('assets/images/product.png', 'Playstation 5', 'Sony', 890, 900,4),
+    Product('assets/images/product.png', 'Playstation 5', 'Sony', 890, 900,4),
+    Product('assets/images/product.png', 'Playstation 5', 'Sony', 890, 900,4),
   ];
 
   @override
@@ -26,7 +26,6 @@ class _ProductPageState extends State<ProductsCategory> {
     return SingleChildScrollView(
       child: Column(
         children: [
-          const SizedBox(height: 15),
           Padding(
             padding: const EdgeInsets.all(16.0),
             child: Row(
@@ -94,8 +93,6 @@ class _ProductPageState extends State<ProductsCategory> {
     return Column(
       children: [
         Container(
-          // height: 455,
-          // width: 284,
           decoration: const BoxDecoration(
               color: Color(0XFF454D5A),
               borderRadius: BorderRadius.all(Radius.circular(20.0))),

@@ -4,11 +4,14 @@ import 'package:get/get.dart';
 import 'package:task_1/app_bottom_bar/controllers/app_bottom_bar_controller.dart';
 import 'package:task_1/app_bottom_bar/views/bottom_app_bar_item.dart';
 import 'package:task_1/cart_item/cart_item_page.dart';
+import 'package:task_1/home/controllers/home_controller.dart';
 import 'package:task_1/home/home.dart';
 import 'package:task_1/profile/profile_page.dart';
 
 class AppBottomBar extends StatelessWidget {
   final AppBottomBarController controller = Get.find();
+  final HomeController controllerHome = Get.put(HomeController());
+
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   final List _pages = [
     const HomePage(),
@@ -51,7 +54,8 @@ class AppBottomBar extends StatelessWidget {
         ),
         // key: controller.scaffoldState,
         body: _pages[controller.selectedIndex.value],
-        bottomNavigationBar: buildBottomNavigationBar(context),
+        bottomNavigationBar:
+        controllerHome.initialIndex.value == 0 ? buildBottomNavigationBar(context) : null,
       ),
     );
   }
