@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
-class ProductDetails extends StatelessWidget {
-  const ProductDetails({super.key});
+class ProductFavored extends StatelessWidget {
+  const ProductFavored({super.key});
 
   @override
   Widget build(BuildContext context) {
