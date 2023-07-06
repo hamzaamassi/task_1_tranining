@@ -5,14 +5,14 @@ import 'package:scroll_snap_list/scroll_snap_list.dart';
 import 'package:task_1/models/produt.dart';
 import 'package:task_1/routes/app_pages.dart';
 
-class AllProducts extends StatefulWidget {
-  const AllProducts({super.key});
+class ProductsCategory extends StatefulWidget {
+  const ProductsCategory({super.key});
 
   @override
-  State<AllProducts> createState() => _ProductPageState();
+  State<ProductsCategory> createState() => _ProductPageState();
 }
 
-class _ProductPageState extends State<AllProducts> {
+class _ProductPageState extends State<ProductsCategory> {
   List<Product> productList = [
     Product('assets/images/product.png', 'Playstation 5', 'Sony', 890, 900),
     Product('assets/images/product.png', 'Playstation 5', 'Sony', 890, 900),

@@ -3,8 +3,8 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:task_1/routes/app_pages.dart';
 
-class ProductInfo extends StatelessWidget {
-  const ProductInfo({Key? key}) : super(key: key);
+class ProductDetails extends StatelessWidget {
+  const ProductDetails({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
